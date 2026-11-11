@@ -1,1 +1,46 @@
+#include <iostream>
+using namespace std;
+
+struct Parcel
+{
+    double weight;
+};
+
+void charge(int grams)
+{
+    cout << "Weight in grams: " << grams << endl;
+}
+
+void charge(double kg, bool express = false,
+            bool insured = false)
+{
+    double amount = kg * 50;
+
+    if(express)
+        amount += 100;
+
+    if(insured)
+        amount += 50;
+
+    cout << "Courier charge: " << amount << endl;
+}
+
+void charge(Parcel p)
+{
+    cout << "Parcel charge: " << p.weight * 50 << endl;
+}
+
+int main()
+{
+    Parcel p = {3.0};
+
+    charge(2000);
+    charge(2);
+    charge(2.0);
+    charge(2.0f);
+    charge(2.0, true);
+    charge(p);
+
+    return 0;
+}
 
