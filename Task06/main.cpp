@@ -1,48 +1,50 @@
-#include <iostream> 
-using namespace std; 
-class Time 
-{ 
-    int h, m; 
- 
-public: 
-    Time(int hh, int mm) 
-    { 
-        h = hh; 
-        m = mm; 
-    } 
- 
-    friend inline int minutesBetween( 
-        const Time &a, const Time &b); 
- 
-    friend inline bool earlier( 
-        const Time &a, const Time &b); 
-}; 
- 
-inline int minutesBetween(const Time &a, const Time &b) 
-{ 
-    int t1 = a.h * 60 + a.m; 
-    int t2 = b.h * 60 + b.m; 
- 
-    if(t1 > t2) 
-        return t1 - t2; 
- 
-    return t2 - t1; 
-} 
- 
-inline bool earlier(const Time &a, const Time &b) 
-{ 
-    int t1 = a.h * 60 + a.m; 
-int t2 = b.h * 60 + b.m; 
-return t1 < t2; 
-} 
-int main() 
-{ 
-} 
-Time departure(9, 45); 
-Time arrival(13, 10); 
-cout << minutesBetween(departure, arrival) 
-<< " "; 
-cout << boolalpha 
-<< earlier(arrival, departure); 
-return 0; 
+
+#include <iostream>
+using namespace std;
+
+struct Parcel
+{
+    double weight;
+};
+
+void charge(int grams)
+{
+    cout << "Weight in grams: " << grams << endl;
+}
+
+void charge(double kg, bool express = false,
+            bool insured = false)
+{
+    double amount = kg * 50;
+
+    if(express)
+    {
+        amount += 100;
+    }
+
+    if(insured)
+    {
+        amount += 50;
+    }
+
+    cout << "Courier charge: " << amount << endl;
+}
+
+void charge(Parcel p)
+{
+    cout << "Parcel charge: " << p.weight * 50 << endl;
+}
+
+int main()
+{
+    Parcel p = {3.0};
+
+    charge(2000);
+    charge(2);
+    charge(2.0);
+    charge(2.0f);
+    charge(2.0, true);
+    charge(p);
+
+    return 0;
 }
